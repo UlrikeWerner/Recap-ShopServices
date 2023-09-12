@@ -1,4 +1,5 @@
 import Entity.Order;
+import Entity.OrderStatus;
 import Entity.Product;
 import Repo.OrderMapRepo;
 import Repo.OrderRepo;
@@ -28,5 +29,9 @@ public class ShopService {
         Order newOrder = new Order(UUID.randomUUID().toString(), products, PROCESSING);
 
         return orderRepo.addOrder(newOrder);
+    }
+
+    public List<Order> getListWithOrderStatus(OrderStatus orderStatus){
+        return orderRepo.getOrders().stream().filter((order) -> order.orderStatus().equals(orderStatus)).toList();
     }
 }
