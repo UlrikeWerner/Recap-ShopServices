@@ -1,6 +1,9 @@
+package Repo;
+
+import Entity.Product;
+import org.junit.jupiter.api.Assertions;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +34,7 @@ class ProductRepoTest {
 
         //THEN
         Product expected = new Product("1", "Apfel");
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
     @org.junit.jupiter.api.Test
@@ -45,7 +48,7 @@ class ProductRepoTest {
 
         //THEN
         Product expected = new Product("2", "Banane");
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
         assertEquals(repo.getProductById("2"), expected);
     }
 

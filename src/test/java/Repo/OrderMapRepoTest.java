@@ -1,3 +1,7 @@
+package Repo;
+
+import Entity.Order;
+import Entity.Product;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -5,12 +9,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OrderListRepoTest {
+class OrderMapRepoTest {
 
     @Test
     void getOrders() {
         //GIVEN
-        OrderListRepo repo = new OrderListRepo();
+        OrderMapRepo repo = new OrderMapRepo();
 
         Product product = new Product("1", "Apfel");
         Order newOrder = new Order("1", List.of(product));
@@ -30,7 +34,7 @@ class OrderListRepoTest {
     @Test
     void getOrderById() {
         //GIVEN
-        OrderListRepo repo = new OrderListRepo();
+        OrderMapRepo repo = new OrderMapRepo();
 
         Product product = new Product("1", "Apfel");
         Order newOrder = new Order("1", List.of(product));
@@ -49,7 +53,7 @@ class OrderListRepoTest {
     @Test
     void addOrder() {
         //GIVEN
-        OrderListRepo repo = new OrderListRepo();
+        OrderMapRepo repo = new OrderMapRepo();
         Product product = new Product("1", "Apfel");
         Order newOrder = new Order("1", List.of(product));
 
@@ -66,7 +70,7 @@ class OrderListRepoTest {
     @Test
     void removeOrder() {
         //GIVEN
-        OrderListRepo repo = new OrderListRepo();
+        OrderMapRepo repo = new OrderMapRepo();
 
         //WHEN
         repo.removeOrder("1");

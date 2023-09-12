@@ -1,3 +1,7 @@
+package Repo;
+
+import Entity.Order;
+
 import java.util.List;
 
 public interface OrderRepo {
