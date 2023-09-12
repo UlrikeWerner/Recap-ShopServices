@@ -4,13 +4,21 @@ import Entity.Product;
 import Repo.OrderMapRepo;
 import Repo.OrderRepo;
 import Repo.ProductRepo;
+import lombok.RequiredArgsConstructor;
 
 import java.time.ZonedDateTime;
 import java.util.*;
 
+@RequiredArgsConstructor
 public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
     private OrderRepo orderRepo = new OrderMapRepo();
+
+    public ShopService(ProductRepo productRepo, OrderRepo orderRepo) {
+        this.productRepo = productRepo;
+        this.orderRepo = orderRepo;
+    }
+
 
     public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();
