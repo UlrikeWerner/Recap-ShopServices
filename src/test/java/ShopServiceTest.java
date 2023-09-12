@@ -3,6 +3,7 @@ import Entity.OrderStatus;
 import Entity.Product;
 import org.junit.jupiter.api.Test;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -20,7 +21,7 @@ class ShopServiceTest {
         Order actual = shopService.addOrder(productsIds);
 
         //THEN
-        Order expected = new Order("-1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
+        Order expected = new Order("-1", List.of(new Product("1", "Apfel")), ZonedDateTime.now(), OrderStatus.PROCESSING);
         assertEquals(expected.products(), actual.products());
         assertNotNull(expected.id());
     }

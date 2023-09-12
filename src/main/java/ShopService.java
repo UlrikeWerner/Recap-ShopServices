@@ -5,6 +5,7 @@ import Repo.OrderMapRepo;
 import Repo.OrderRepo;
 import Repo.ProductRepo;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class ShopService {
@@ -20,7 +21,7 @@ public class ShopService {
 
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, ZonedDateTime.now(), OrderStatus.PROCESSING);
 
         return orderRepo.addOrder(newOrder);
     }
