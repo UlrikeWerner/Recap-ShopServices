@@ -30,7 +30,7 @@ public class ShopService {
         return orderRepo.addOrder(newOrder);
     }
 
-    public Order changeOrderStatus(String id, OrderStatus orderStatus){
+    public Order updateOrderStatus(String id, OrderStatus orderStatus){
         Order orderToChange = orderRepo.getOrderById(id);
         Order newOrder = orderToChange.withOrderStatus(orderStatus);
         orderRepo.removeOrder(id);
