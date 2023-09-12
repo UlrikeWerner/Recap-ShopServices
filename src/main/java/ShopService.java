@@ -5,10 +5,7 @@ import Repo.OrderMapRepo;
 import Repo.OrderRepo;
 import Repo.ProductRepo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
@@ -18,11 +15,9 @@ public class ShopService {
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
             Optional<Product> productToOrder = productRepo.getProductById(productId);
-            if (productToOrder.isEmpty()) {
-                System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                return null;
-            }
-            products.add(productToOrder.get());
+            productToOrder.ifPresent(products::add);
+            productToOrder.orElseThrow(() -> new NoSuchElementException("Product mit der Id: " + productId + " konnte nicht bestellt werden!"));
+
         }
 
         Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
