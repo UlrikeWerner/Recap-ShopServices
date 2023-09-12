@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static Entity.OrderStatus.PROCESSING;
-
 public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
     private OrderRepo orderRepo = new OrderMapRepo();
@@ -26,7 +24,7 @@ public class ShopService {
             products.add(productToOrder);
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, PROCESSING);
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
 
         return orderRepo.addOrder(newOrder);
     }
@@ -34,7 +32,7 @@ public class ShopService {
     public Order changeOrderStatus(String id, OrderStatus orderStatus){
         Order orderToChange = orderRepo.getOrderById(id);
         Order newOrder = orderToChange.withOrderStatus(orderStatus);
-        orderRepo.removeOrder(orderToChange.id());
+        orderRepo.removeOrder(id);
         orderRepo.addOrder(newOrder);
         return orderRepo.getOrderById(id);
     }
