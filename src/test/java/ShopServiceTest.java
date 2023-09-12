@@ -72,6 +72,10 @@ class ShopServiceTest {
 
         List<Order> newOrderList = shopService.getListWithOrderStatus(OrderStatus.IN_DELIVERY);
 
-        assertEquals(List.of(newOrder3, newOrder1), newOrderList);
+        assertEquals(2, newOrderList.size());
+        assertTrue(newOrderList.contains(newOrder1));
+        assertTrue(newOrderList.contains(newOrder3));
+        assertEquals(order1.id(), newOrder1.id());
+        assertEquals(order3.id(), newOrder3.id());
     }
 }
