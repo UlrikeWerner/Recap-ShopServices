@@ -4,6 +4,7 @@ import Entity.Product;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,20 +26,15 @@ class ShopServiceTest {
     }
 
     @Test
-    void addOrderTest_whenInvalidProductId_expectNull() {
-        //GIVEN
+    void addOrderTest_whenInvalidProductId_throwsNoSuchElementException() {
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1", "5");
 
-        //WHEN
-        Order actual = shopService.addOrder(productsIds);
-
-        //THEN
-        assertNull(actual);
+        assertThrows(NoSuchElementException.class, () -> shopService.addOrder(productsIds));
     }
 
     @Test
-    void changeOrderStatusShouldGiveSameOrderWithNewOrderStatus(){
+    void changeOrderStatus_shouldGiveSameOrder_withNewOrderStatus(){
         ShopService shopService = new ShopService();
         Order order1 = shopService.addOrder(List.of("1", "3"));
         Order newOrder1 = shopService.changeOrderStatus(order1.id(), OrderStatus.IN_DELIVERY);
@@ -50,7 +46,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void getListWithOrderStatusShouldReturnEmptyListWhenOrderStatusNotFit() {
+    void getListWithOrderStatus_shouldReturnEmptyList_whenOrderStatusNotFit() {
 
         ShopService shopService = new ShopService();
         List<Order> newOrderList = shopService.getListWithOrderStatus(OrderStatus.IN_DELIVERY);
@@ -59,7 +55,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void getListWithOrderStatusShouldReturnListWithRightOrderStatus() {
+    void getListWithOrderStatus_shouldReturnList_withRightOrderStatus() {
 
         ShopService shopService = new ShopService();
         Order order1 = shopService.addOrder(List.of("1", "3"));
