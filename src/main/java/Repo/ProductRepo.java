@@ -11,6 +11,8 @@ public class ProductRepo {
     public ProductRepo() {
         products = new ArrayList<>();
         products.add(new Product("1", "Apfel"));
+        products.add(new Product("2", "Banane"));
+        products.add(new Product("3", "Kirsche"));
     }
 
     public List<Product> getProducts() {

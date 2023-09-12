@@ -1,4 +1,5 @@
 import Entity.Order;
+import Entity.OrderStatus;
 import Entity.Product;
 import Repo.OrderMapRepo;
 import Repo.OrderRepo;
@@ -7,8 +8,6 @@ import Repo.ProductRepo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static Entity.OrderStatus.PROCESSING;
 
 public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
@@ -25,8 +24,20 @@ public class ShopService {
             products.add(productToOrder);
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, PROCESSING);
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
 
         return orderRepo.addOrder(newOrder);
+    }
+
+    public Order changeOrderStatus(String id, OrderStatus orderStatus){
+        Order orderToChange = orderRepo.getOrderById(id);
+        Order newOrder = orderToChange.withOrderStatus(orderStatus);
+        orderRepo.removeOrder(id);
+        orderRepo.addOrder(newOrder);
+        return orderRepo.getOrderById(id);
+    }
+
+    public List<Order> getListWithOrderStatus(OrderStatus orderStatus){
+        return orderRepo.getOrders().stream().filter((order) -> order.orderStatus().equals(orderStatus)).toList();
     }
 }

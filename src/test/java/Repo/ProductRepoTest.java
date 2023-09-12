@@ -21,6 +21,8 @@ class ProductRepoTest {
         //THEN
         List<Product> expected = new ArrayList<>();
         expected.add(new Product("1", "Apfel"));
+        expected.add(new Product("2", "Banane"));
+        expected.add(new Product("3", "Kirsche"));
         assertEquals(actual, expected);
     }
 
