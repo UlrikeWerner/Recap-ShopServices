@@ -31,6 +31,14 @@ public class ShopService {
         return orderRepo.addOrder(newOrder);
     }
 
+    public Order changeOrderStatus(String id, OrderStatus orderStatus){
+        Order orderToChange = orderRepo.getOrderById(id);
+        Order newOrder = orderToChange.withOrderStatus(orderStatus);
+        orderRepo.removeOrder(orderToChange.id());
+        orderRepo.addOrder(newOrder);
+        return orderRepo.getOrderById(id);
+    }
+
     public List<Order> getListWithOrderStatus(OrderStatus orderStatus){
         return orderRepo.getOrders().stream().filter((order) -> order.orderStatus().equals(orderStatus)).toList();
     }
